@@ -27,8 +27,11 @@ const playButton = document.getElementById('play-btn');
 
 playButton.addEventListener('click',startGame); 
 
-
+// array delle bombe
  let bombArray =[];
+
+//  array tentativi indovinati dall'utente
+let rightAttempt =[];
 
 
 
@@ -116,8 +119,6 @@ function startGame(){
 
 
 function cellClick(){
-    this.classList.add('color');
-    this.style.pointerEvents ='none';
 
     // se clicco su un quadrato:
         // prelevo il numero scritto nel quadrato con il THIS
@@ -127,10 +128,16 @@ function cellClick(){
         //  se il numero è presente nell'array BOMBE >> aggiungo classe bomb alla cella e tolgo la classe color
 
         if(bombArray.includes(squareNumber)){
-            this.classList.remove('color');
+            
             this.classList.add('bomb');
             this.style.pointerEvents ='none';
             
+        } else{
+            this.classList.add('color');
+            this.style.pointerEvents ='none';
+            // aggiungo i tentativi andati a buon fine nell'array rightAttempt
+            rightAttempt.push(squareNumber);
+            console.log(rightAttempt)
         }
     
 }
