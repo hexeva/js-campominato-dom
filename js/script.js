@@ -111,9 +111,34 @@ function startGame(){
      gameGrid.appendChild(newGeneratedSquare);
 
     }
+
+
+
+
+function cellClick(){
+    this.classList.add('color');
+    this.style.pointerEvents ='none';
+
+    // se clicco su un quadrato:
+        // prelevo il numero scritto nel quadrato con il THIS
+        const squareNumber = parseInt(this.querySelector('span').textContent);
+        
+       
+        //  se il numero è presente nell'array BOMBE >> aggiungo classe bomb alla cella e tolgo la classe color
+
+        if(bombArray.includes(squareNumber)){
+            this.classList.remove('color');
+            this.classList.add('bomb');
+            this.style.pointerEvents ='none';
+            
+        }
     
 }
-// fine funzione principale
+// fine funzione callback del quadrato
+
+    
+}
+// FINE FUNZIONE PRINCIPALE
 
 // funzione per generare i quadrati:
     // argomenti:
@@ -145,20 +170,6 @@ function generatedSquare(innerNumber,cellDimension){
 // funzione cellClick per aggiungere la classe color al singolo quadrato
 
 
-function cellClick(){
-    this.classList.add('color');
-    // se clicco su un quadrato:
-        // prelevo il numero scritto nel quadrato con il THIS
-        const squareNumber = parseInt(this.querySelector('span').textContent);
-        
-       
-        //  se il numero è presente nell'array BOMBE >> ALERT
-
-        if(bombArray.includes(squareNumber)){
-            alert('bomb');
-        }
-    
-}
 
 
 function getRndInteger(min, max) {
