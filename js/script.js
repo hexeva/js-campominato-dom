@@ -17,7 +17,6 @@
     //  Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una b.
 
 
-// al singolo CLICK della cella aggiungo la classe color 
 
 // AL PLAY:
 // seleziono il pulsante e lo salvo in una variabile
@@ -26,6 +25,8 @@ const playButton = document.getElementById('play-btn');
 // aggiungo evento al pulsante collegato alla funzione creata START_GAME
 
 playButton.addEventListener('click',startGame); 
+
+// dopo l'evento click genero i 2 array (bombe e numeri indovinati)
 
 // array delle bombe
  let bombArray =[];
@@ -37,7 +38,7 @@ let rightAttempt =[];
 
 // FUNZIONI
 
-// funzione di inizio gioco
+// funzione callback di inizio gioco che inserirò nell'event listener click di playButton
 
 function startGame(){
     //  sparisce l'h2 dandogli classe hidden appare la griglia togliendo la classe hidden
@@ -51,16 +52,16 @@ function startGame(){
     console.log(gameGrid);
     // rimuovo la classe hidden
     gameGrid.classList.remove('hidden');
-    // resetto il la griglia a ogni start
+    // resetto  la griglia a ogni start
     gameGrid.innerHTML = '';
 
-    // [2] verificare cosa ha scelto l'utente
-    // prima richiamo e memorizzo in una variabile cosa la select dell'html
+    // [2] verificare cosa ha scelto l'utente come difficoltà
+    // prima richiamo e memorizzo in una variabile const la select dell'html
 
     const levelSelect = document.getElementById('choose').value;
 
     
-    // let level;
+    
 
     // creo un numero di quadrati in base alla selezione della difficoltà
     // definisco una variabile per il numero di quadrati e una variabile per le sue dimensioni:
@@ -70,6 +71,7 @@ function startGame(){
     if(levelSelect == 'easy'){
         maxGridNumber = 100;
         squareDimension = 10;
+
     }else if(levelSelect == 'hard'){
 
         maxGridNumber =  81;
@@ -84,8 +86,6 @@ function startGame(){
 
     // GENERIAMO LE BOMBE con un array
     
-    
-
     // ciclo while girerà finchè nn avrà pushato nell'array 16 elementi non uguali
 
     while(bombArray.length < 16){
@@ -95,7 +95,7 @@ function startGame(){
             bombArray.push(randomBomb);
 
         }
-        console.log(bombArray);
+        
     }
 
     // creo ora un ciclo for per andare volta volta a popolare la main grid con un nuovo quadrato
@@ -116,11 +116,12 @@ function startGame(){
     }
 
 
+    // funzione cellClick per aggiungere la classe color al singolo quadrato
 
 
-function cellClick(){
+    function cellClick(){
 
-    // se clicco su un quadrato:
+        // se clicco su un quadrato:
         // prelevo il numero scritto nel quadrato con il THIS
         const squareNumber = parseInt(this.querySelector('span').textContent);
         
@@ -140,8 +141,8 @@ function cellClick(){
             console.log(rightAttempt)
         }
     
-}
-// fine funzione callback del quadrato
+    }
+    // fine funzione callback del quadrato
 
     
 }
@@ -174,7 +175,6 @@ function generatedSquare(innerNumber,cellDimension){
 }
 // fine funzione generatedSquare
 
-// funzione cellClick per aggiungere la classe color al singolo quadrato
 
 
 
